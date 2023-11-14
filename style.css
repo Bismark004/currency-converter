@@ -1,0 +1,140 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Agbalumo' , sans-serif;
+}
+
+body {
+    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+    display: flex;
+    padding: 0 10px;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    background: rgb(41, 27, 27);
+    width: 600px;
+    width: 370px;
+    padding: 30px;
+    border-radius: 5px;
+    background: #b96868;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+h1{
+    text-align: center;
+    
+}
+
+form {
+    margin: 40px 0 20px 0;
+}
+
+form :where(input, select, button){
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    background: #444;
+    color: white;
+}
+
+p{
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+input{
+    height: 50px;
+    font-size: 17px;
+    padding: 0 15px;
+    border: 1px solid #999;
+    background: #d7cbcb;
+}
+
+input:focus {
+    padding: 0 14px;
+    border: 2px solid #675afe;
+    background: #555;
+  }
+
+   .select-container {
+    display: flex;
+    width: 115px;
+    height: 45px;
+    align-items: center;
+    border-radius: 5px;
+    justify-content: center;
+    border: 1px solid #999;
+    background: #fff;
+    color: #000;
+  }
+
+  .select-container img {
+    max-width: 21px;
+  }
+
+   select {
+    width: auto;
+    font-size: 16px;
+    background: none;
+    margin: 0 -5px 0 5px;
+    color: #000;
+  }
+
+  #currencies {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+ }
+
+ select::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  select::-webkit-scrollbar-track {
+    background: #fff;
+  }
+
+  select::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+    border-right: 2px solid #ffffff;
+  }
+
+  .reverse {
+    cursor: pointer;
+    margin-top: 30px;
+    font-size: 22px;
+    color: #fff;
+  }
+
+  #exchange-rate {
+    font-size: 17px;
+    margin: 20px 0 30px;
+  }
+
+  button {
+    height: 52px;
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+    background: #cebfbf;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background: #333;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  } 
+        
+        
+  
