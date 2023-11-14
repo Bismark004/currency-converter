@@ -1,4 +1,5 @@
-let country_list = {
+//currency code mapping to country code
+let countryList = {
     AED: "AE",
     AFN: "AF",
     XCD: "AG",
@@ -160,82 +161,77 @@ let country_list = {
     ZWD: "ZW"
   };
 
-  // Accessing HTML elements and saving them as variables
-
-
+  // DOM elements
 const fromCurrencySelect = document.querySelector('#first-currency select');
 const toCurrencySelect = document.querySelector('#second-currency select');
 const exchangeRateDisplay = document.querySelector('#exchange-rate');
 const getExchangeRateBtn = document.querySelector('button');
 
-for (let currencyCode in country_list ) {
-    const optionFrom = document.createElement('option');
-    const optionTo = document.createElement('option');
-
-    optionFrom.value = currencyCode;
-    optionTo.value = currencyCode;
-
-    if (currencyCode === 'USD') {
-        optionFrom.selected = true;
+// Function to create an option element for a currency
+function createOption(currencyCode, selected = false) {
+    const option = document.createElement('option');
+    option.value = currencyCode;
+    option.text = currencyCode;
+    if (selected) {
+        option.selected = true;
     }
-     if (currencyCode === 'GHS'){
-        optionTo.selected = true;
-     }
-
-     optionFrom.text = currencyCode;
-     optionTo.text = currencyCode;
-
-     fromCurrencySelect.add(optionFrom);
-     toCurrencySelect.add(optionTo);
+    return option;
 }
 
+// Function to load flag image based on the selected currency
 function loadFlag(selectElement) {
     const currencyCode = selectElement.value;
     const flagImg = selectElement.parentElement.querySelector('img');
-    flagImg.src = `https://flagcdn.com/48x36/${country_list[currencyCode].toLowerCase()}.png`;
-
+    flagImg.src = `https://flagcdn.com/48x36/${countryList[currencyCode].toLowerCase()}.png`;
 }
 
+// Populating currency select dropdowns
+for (let currencyCode in countryList) {
+    fromCurrencySelect.add(createOption(currencyCode, currencyCode === 'USD'));
+    toCurrencySelect.add(createOption(currencyCode, currencyCode === 'GHS'));
+}
+
+// Event listeners
 fromCurrencySelect.addEventListener('change', (e) => loadFlag(e.target));
 toCurrencySelect.addEventListener('change', (e) => loadFlag(e.target));
 
-window.addEventListener("load", () => {
-    getExchangeRate();
-});
+// Fetch exchange rate on page load
+window.addEventListener("load", getExchangeRate);
 
+// Fetch exchange rate on button click
 getExchangeRateBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    getExchangeRate()
+    getExchangeRate();
 });
 
+// Swap selected currencies and fetch exchange rate on reverse button click
 const reverse = document.querySelector(".reverse");
 reverse.addEventListener("click", () => {
-    let tempCode = fromCurrencySelect.value;
-    fromCurrencySelect.value = toCurrencySelect.value;
-    toCurrencySelect.value = tempCode;
-    loadFlag(fromCurrencySelect);
-    loadFlag(toCurrencySelect);
+    [fromCurrencySelect.value, toCurrencySelect.value] = [toCurrencySelect.value, fromCurrencySelect.value];
+    [fromCurrencySelect, toCurrencySelect].forEach((select) => {
+        loadFlag(select);
+    });
     getExchangeRate();
-})
+});
 
-
-
+// Function to fetch and display exchange rate
 function getExchangeRate() {
     const amount = document.querySelector("input");
     const exchangeRateTxt = document.getElementById("exchange-rate");
 
-    let amountVal = amount.value;
-    if (amountVal == "" || amountVal == "0") {
-        amount.value = "1";
-        amountVal = 1;
-    }
+    // Extract amount value, default to 1 if invalid or empty
+    let amountVal = parseFloat(amount.value) || 1;
 
-    const fromCurrencyCode = fromCurrencySelect.value;  // Use value property
+    const fromCurrencyCode = fromCurrencySelect.value;
     const toCurrencyCode = toCurrencySelect.value;
 
+    // Display loading message
     exchangeRateTxt.innerText = "Getting exchange rate...";
+
+    // API URL for exchange rate
     let url = `https://v6.exchangerate-api.com/v6/28393d4f9019e1e3194031d6/latest/${fromCurrencyCode}`;
 
+    // Fetch exchange rate data
     fetch(url)
         .then((response) => response.json())
         .then((result) => {
@@ -244,10 +240,7 @@ function getExchangeRate() {
             exchangeRateTxt.innerText = `${amountVal} ${fromCurrencyCode} = ${totalExchangeRate} ${toCurrencyCode}`;
         })
         .catch(() => {
+            // Display error message if fetch fails
             exchangeRateTxt.innerText = "Something went wrong";
         });
 }
-
-
-
-

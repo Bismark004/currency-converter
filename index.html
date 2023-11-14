@@ -5,51 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/> 
     <link href="https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet">
-    <title>Currency Converter</title>
     <link rel="stylesheet" href="style.css">
-    
+    <title>Currency Converter</title>
 </head>
 <body>
+    <!-- Main container for the entire page -->
     <div class="container">
+        <!-- Heading for the currency converter -->
         <h1>Currency Converter</h1>
 
-        <form action="#">
+        <!-- Form for user input and currency conversion -->
+        <form id="currencyConverterForm">
+            <!-- Input field for entering the amount -->
             <div class="amount">
-                <p>Enter the amount</p>
-                <input type="text" value="1">
+                <label for="amountInput">Enter the amount</label>
+                <input type="text" id="amountInput" value="1">
             </div>
 
+            <!-- Section for selecting currencies -->
             <div id="currencies">
-                <div id="first-currency">
-                    <p>From</p>
+                <!-- Container for selecting the 'From' currency -->
+                <div class="currency-container" id="fromCurrencyContainer">
+                    <label for="fromCurrency">From</label>
+                    <!-- Container with flag image and select dropdown for 'From' currency -->
                     <div class="select-container">
-                        <img src="https://flagcdn.com/48x36/us.png" alt="flag">
-                        <select></select>
+                        <img src="https://flagcdn.com/48x36/us.png" alt="US flag">
+                        <select id="fromCurrency"></select>
                     </div>
                 </div>
 
+                <!-- Button for reversing the 'From' and 'To' currencies -->
                 <div class="reverse">
-                    <i class="fa-solid fa-right-left"></i>
+                    <i class="fas fa-exchange-alt"></i>
                 </div>
-                <div id="second-currency">
-                    <p>To</p>
+
+                <!-- Container for selecting the 'To' currency -->
+                <div class="currency-container" id="toCurrencyContainer">
+                    <label for="toCurrency">To</label>
+                    <!-- Container with flag image and select dropdown for 'To' currency -->
                     <div class="select-container">
-                        <img src="https://flagcdn.com/48x36/gh.png" alt="flag">
-                        <select></select>
+                        <img src="https://flagcdn.com/48x36/gh.png" alt="Ghana flag">
+                        <select id="toCurrency"></select>
                     </div>
                 </div>
-
-
             </div>
 
+            <!-- Display area for the exchange rate -->
             <div id="exchange-rate">
                 Getting exchange rate...
             </div>
 
-            <button>Get Exchange Rate</button>
+            <!-- Button for triggering the exchange rate calculation -->
+            <button type="button" onclick="getExchangeRate()">Get Exchange Rate</button>
         </form>
     </div>
-    <script src=script.js></script>
     
+    <!-- JavaScript file inclusion for handling logic -->
+    <script src="script.js"></script>
 </body>
 </html>
