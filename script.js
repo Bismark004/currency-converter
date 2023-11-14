@@ -162,8 +162,8 @@ let countryList = {
   };
 
   // DOM elements
-const fromCurrencySelect = document.querySelector('#first-currency select');
-const toCurrencySelect = document.querySelector('#second-currency select');
+const fromCurrencySelect = document.getElementById('fromCurrency');
+const toCurrencySelect = document.getElementById('toCurrency');
 const exchangeRateDisplay = document.querySelector('#exchange-rate');
 const getExchangeRateBtn = document.querySelector('button');
 
